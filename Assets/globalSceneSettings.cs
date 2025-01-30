@@ -12,7 +12,7 @@ public class globalSceneSettings : MonoBehaviour
     void Start(){
         masterSettings = GameObject.FindGameObjectWithTag("MasterSettings").GetComponent<MasterSettings>();
         for(int i = 0; i < PlayOnStart.Length; i++){
-            PlayOnStart[i].volume = masterSettings.musicVol;
+            PlayOnStart[i].volume = masterSettings.musicVol * 0.01f;
             PlayOnStart[i].Play();
         }
     }

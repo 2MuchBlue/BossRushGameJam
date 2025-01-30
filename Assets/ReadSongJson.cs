@@ -14,6 +14,9 @@ public class ReadSongJson : MonoBehaviour
     object appleJson;
 
     [SerializeField]
+    AudioSource audioSource;
+
+    [SerializeField]
     float bpm = -1;
     [SerializeField]
     float ticksPerBeat = -1;
@@ -188,6 +191,9 @@ public class ReadSongJson : MonoBehaviour
     void Update()
     {
 
+        float globalTime = (float)audioSource.timeSamples / (float)audioSource.clip.frequency;
+        Debug.Log(globalTime);
+
         ////Debug.Log(secs2ticks(Time.timeSinceLevelLoad));
 
         if(recompJson){
@@ -198,13 +204,13 @@ public class ReadSongJson : MonoBehaviour
         note checkNote = null;
         try
         {
-            float patternTime = (secs2ticks(Time.timeSinceLevelLoad) * 0.03125f) % (songObject.sequence.Length - 1);
+            float patternTime = (secs2ticks(globalTime) * 0.03125f) % (songObject.sequence.Length - 1);
             int seqIndex = (int)Mathf.Floor(patternTime); // index for the sequence list
             int seqItem = songObject.sequence[ seqIndex ] - 1; // result of sequence grab; one is subtracted because boopbox starts pattern indexes at 1, but the first item is at 0;
                 //Debug.Log("channel: " + channel2compile + " || sequence index: " + seqIndex + " || result: " + seqItem);
             if(seqItem < 0) { return; } // if it is less then 0 (-1) then just skip this and leave
                 //Debug.Log("checking for notes, tickTime: " + patternTime );
-            checkNote = searchForNoteAtTime(Time.timeSinceLevelLoad, seqItem );
+            checkNote = searchForNoteAtTime(globalTime, seqItem );
             if(checkNote != null){
                 volAttack.onTrigger.Invoke();
             }else{
