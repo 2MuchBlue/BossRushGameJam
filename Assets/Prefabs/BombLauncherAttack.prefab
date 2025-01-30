@@ -44,8 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5fb5b021524f324ab058c651ae1f0b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useGlobalSettings: 1
   radiusFromCenter: 7.5
-  lazerCount: 2
+  lazerCount: 1
   shootCount: 1
   bpm: 60
   masterShootMultiply: 1
