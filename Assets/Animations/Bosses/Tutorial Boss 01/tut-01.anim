@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ChooseNewAttack
+  m_Name: tut-01
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -31,7 +31,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 4
+    m_StopTime: 10
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -52,16 +52,51 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
+    functionName: ShootOnceAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 90
+    intParameter: 0
+    messageOptions: 0
+  - time: 0
     functionName: doNothing
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
+    floatParameter: 90
     intParameter: 0
     messageOptions: 0
-  - time: 4
-    functionName: chooseNextAttack
+  - time: 1.9833333
+    functionName: ShootOnceAttack
     data: 
     objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
+    floatParameter: 90
+    intParameter: 0
+    messageOptions: 0
+  - time: 3.9833333
+    functionName: ShootOnceAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 90
+    intParameter: 0
+    messageOptions: 0
+  - time: 5.983333
+    functionName: ShootOnceAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 90
+    intParameter: 0
+    messageOptions: 0
+  - time: 7.983333
+    functionName: ShootOnceAttack
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 90
+    intParameter: 0
+    messageOptions: 0
+  - time: 10
+    functionName: doNothing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 90
     intParameter: 0
     messageOptions: 0
