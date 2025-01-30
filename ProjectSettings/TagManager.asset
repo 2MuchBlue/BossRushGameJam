@@ -8,6 +8,10 @@ TagManager:
   - yellow
   - blue
   - red
+  - green
+  - player
+  - globalSceneSettingsObject
+  - MasterSettings
   layers:
   - Default
   - TransparentFX
