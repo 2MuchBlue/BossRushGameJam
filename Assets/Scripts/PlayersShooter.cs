@@ -5,6 +5,11 @@ using UnityEngine;
 
 public class PlayersShooter : MonoBehaviour
 {
+    globalSceneSettings globalSceneSettings;
+    [SerializeField]
+    bool useGlobalSettings = true;
+    
+    [Header("Player Shooter Settings")]
     public BulletPattern bullet;
     public float bpm = 150;
     public float shotsPerBeat = 0.25f;
@@ -14,6 +19,10 @@ public class PlayersShooter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(useGlobalSettings){
+            globalSceneSettings = GameObject.FindGameObjectWithTag("globalSceneSettingsObject").GetComponent<globalSceneSettings>();
+            bpm = globalSceneSettings.bpm;
+        }
         InvokeRepeating("tryShoot", 0, 60 / bpm * shotsPerBeat);
     }
 
@@ -25,6 +34,10 @@ public class PlayersShooter : MonoBehaviour
             Input.GetAxisRaw("ShootVert"),
             0
         ).normalized;
+
+        if(Input.GetMouseButton(0)){
+            aim = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
+        }
 
         if(aim.magnitude > 0.1){
             float offset = 0;

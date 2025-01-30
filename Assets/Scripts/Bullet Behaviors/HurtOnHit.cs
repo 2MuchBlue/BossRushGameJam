@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HurtOnHit : MonoBehaviour
 {
@@ -12,7 +13,9 @@ public class HurtOnHit : MonoBehaviour
     public float radius = 0.2f;
 
     float startLife = 0;
-    public float lifetime = 10; 
+    public float lifetime = 10;
+
+    public UnityEvent OnHitSomething;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +47,7 @@ public class HurtOnHit : MonoBehaviour
     }
 
     void bulletExpire(){
+        OnHitSomething.Invoke();
         Destroy(this.gameObject);
     }
 }

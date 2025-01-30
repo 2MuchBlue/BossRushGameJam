@@ -11,14 +11,17 @@ public class SummonAttacks : MonoBehaviour
     public GameObject bulletAreaAttackPrefab;
     public GameObject ShootOnceAttackPrefab;
     public GameObject BombLauncherAttackPrefab;
+    [Space]
+    [Header("Audio")]
+    public AudioSource[] audios;
 
 
     public void spawnBulletCircle(float angle){
         Instantiate(bulletCircleAttackPrefab, new Vector3(0, 0, 10), Quaternion.Euler(0, 0, angle));
     }
 
-    public void spawnRandomLazerAttack(){
-        Instantiate(randomLazerAttackPrefab, new Vector3(0, 0, 10), Quaternion.Euler(0, 0, 0));
+    public void spawnRandomLazerAttack(float attackCount = -1){
+        Instantiate(randomLazerAttackPrefab, new Vector3(0, 0, 10), Quaternion.Euler(0, 0, attackCount));
     }
     public void bulletFlyByAttack(float angle = 45){
         Instantiate(bulletFlyByAttackPrefab, new Vector3(0, 0, 10), Quaternion.Euler(0, 0, angle));
@@ -38,5 +41,9 @@ public class SummonAttacks : MonoBehaviour
 
     public void doNothing(){
         // this is to make the animator stop complaining. This function is empty :P
+    }
+
+    public void PlaySound(int index){
+        audios[index].Play();
     }
 }

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class BulletCircle : MonoBehaviour
 {
+    globalSceneSettings globalSceneSettings;
+    [SerializeField]
+    bool useGlobalSettings = true;
+
     [Header("Play With These")]
     public bool rippleBullets = false; // if true, bullets will fire in the order they were placed
     public float radiusFromCenter = 10;
@@ -29,6 +33,11 @@ public class BulletCircle : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
+        if(useGlobalSettings){
+            globalSceneSettings = GameObject.FindGameObjectWithTag("globalSceneSettingsObject").GetComponent<globalSceneSettings>();
+            timeToMakeFullCircle = 60 / globalSceneSettings.bpm;
+        }
+
         displayObject.transform.SetParent(null, true);
         angle = transform.rotation.eulerAngles.z;
         bulletObjects = new GameObject[bulletCount];

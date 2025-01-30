@@ -6,7 +6,11 @@ using UnityEngine;
 
 public class RandomLazerAttack : MonoBehaviour
 {
+    globalSceneSettings globalSceneSettings;
+    [SerializeField]
+    bool useGlobalSettings = true;
 
+    [Header("Lazer Attack Settings")]
     public float radiusFromCenter = 10;
     public int lazerCount = 5; // lazers to shoot before attack is over;
     public float shootCount = 4; // bullets shot on each call;
@@ -22,7 +26,14 @@ public class RandomLazerAttack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(useGlobalSettings){
+            globalSceneSettings = GameObject.FindGameObjectWithTag("globalSceneSettingsObject").GetComponent<globalSceneSettings>();
+            bpm = globalSceneSettings.bpm;
+        }
+
+        if(transform.eulerAngles.z < 0){
+            shootCount = transform.eulerAngles.z;
+        }
         UnityEngine.Random.InitState(this.gameObject.scene.GetHashCode() * (int)Time.timeSinceLevelLoad);
         if (player == null){
             GameObject[] poliblePlayers = GameObject.FindGameObjectsWithTag("Player");

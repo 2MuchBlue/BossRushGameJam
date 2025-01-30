@@ -19,6 +19,10 @@ public class HealthHadler : MonoBehaviour
     [SerializeField]
     UnityEvent onDeath;
 
+    public void applyDamage(int damage){
+        Health -= damage;
+    } 
+
     // Start is called before the first frame update
     void Start()
     {

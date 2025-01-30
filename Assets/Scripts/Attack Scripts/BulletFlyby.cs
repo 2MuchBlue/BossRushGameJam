@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BulletFlyby : BulletCircle
 {
+    
     new public void PlaceBullet(){
         float angleTicks = (2 * Mathf.PI) / bulletCount;
         

@@ -7,6 +7,11 @@ using UnityEngine.Subsystems;
 
 public class BombBulletBehavior : MonoBehaviour
 {
+    globalSceneSettings globalSceneSettings;
+    [SerializeField]
+    bool useGlobalSettings = true;
+
+    [Header("Bomb Bullet Settings")]
     public float startingSpeed = 10;
     float startTime;
     Vector3 startPos;
@@ -25,6 +30,11 @@ public class BombBulletBehavior : MonoBehaviour
     {
         startTime = Time.timeSinceLevelLoad;
         startPos = transform.position;
+        if(useGlobalSettings){
+            globalSceneSettings = GameObject.FindGameObjectWithTag("globalSceneSettingsObject").GetComponent<globalSceneSettings>();
+
+            timeTillExplode = 60 / globalSceneSettings.bpm;
+        }
         Invoke("explodeBomb", timeTillExplode);
     }
 
@@ -45,7 +55,7 @@ public class BombBulletBehavior : MonoBehaviour
         }
     }
 
-    void explodeBomb(){
+    public void explodeBomb(){
         
         Debug.Log("trying to explode");
         if(!exploded){
@@ -64,5 +74,11 @@ public class BombBulletBehavior : MonoBehaviour
 
     void destroyThisObject(){
         Destroy(this.gameObject);
+    }
+
+    void OnCollisionEnter(Collision other){
+        if(other.collider.CompareTag("Player")){
+            explodeBomb();
+        }
     }
 }

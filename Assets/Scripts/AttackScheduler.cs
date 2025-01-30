@@ -2,25 +2,57 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 
 public class AttackScheduler : MonoBehaviour
 {
     public Animator animatorControl;
 
+    [TextArea]
+    public string attackOrder;
+    int[] attackInts;
+    int index;
+
     public CanTriggerAttackClass[] Attacks;
-    /*
+    public UnityEvent OnBossKilled;
+    int thingsStillUp;
+    
     // Start is called before the first frame update
     void Start()
     {
+        thingsStillUp = Attacks.Length;
+        attackInts = System.Array.ConvertAll(attackOrder.Split(','), int.Parse);
     }
-
+    /*
     // Update is called once per frame
     void Update()
     {
         
      //   animatorControl.SetTrigger("Attack 1");
     }*/
+
+    public void chooseNextAttack(int attempts = 0){
+        if(thingsStillUp < 1){
+            OnBossKilled.Invoke();
+            return;
+        }
+        if(attempts > Attacks.Length){
+            return;
+        }
+        CanTriggerAttackClass attack = Attacks[attackInts[index % attackInts.Length] % Attacks.Length];
+        if(attack.canBeTriggered){
+            animatorControl.SetTrigger(attack.trigger);
+            Debug.Log("chosen index: " + index);
+            index++;
+            return;
+        }else{
+            index++;
+            attempts++;
+            chooseNextAttack(attempts);
+            return;
+        }
+    }
 
     public void pickRandomAttack(){
         int index = (int)Mathf.Round(UnityEngine.Random.Range(0, Attacks.Length));
@@ -48,5 +80,6 @@ public class AttackScheduler : MonoBehaviour
 
     public void disableAnAttack(int index){
         Attacks[index].canBeTriggered = false;
+        thingsStillUp--;
     }
 }
