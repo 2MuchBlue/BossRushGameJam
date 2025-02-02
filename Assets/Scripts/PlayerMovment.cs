@@ -55,10 +55,10 @@ public class PlayerMovment : MonoBehaviour
             dragVal = downSpeed;
         }*/
 
-        if(Input.GetButtonDown("Jump") && rollTimer.isFinished()){
+        /*if(Input.GetButtonDown("Jump") && rollTimer.isFinished()){
             rollTimer.startTimer();
             cc.Move(movementVector * rollDist);
-        }
+        }*/
 
         velocity += ((movementVector * speed * Time.deltaTime) - velocity) * Time.deltaTime * dragVal ;
         //cameraVelocity = (targetCamPos - cam.transform.position) * Time.deltaTime * camDrag;

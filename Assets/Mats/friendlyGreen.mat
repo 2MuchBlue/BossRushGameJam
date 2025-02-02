@@ -75,7 +75,7 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _LightColor: {r: 0.42502302, g: 0.8301887, b: 0.27934018, a: 0}
+    - _LightColor: {r: 0.26442313, g: 1, b: 0, a: 1}
     - _LightDirection: {r: -1, g: -1, b: 0, a: 1}
-    - _MainColor: {r: 0, g: 0.1764706, b: 0.18039216, a: 1}
+    - _MainColor: {r: 0, g: 0.7603097, b: 1, a: 1}
   m_BuildTextureStacks: []

@@ -21,7 +21,14 @@ public class HealthHadler : MonoBehaviour
 
     public void applyDamage(int damage){
         Health -= damage;
-    } 
+    }
+
+    void OnDrawGizmos(){
+        if(healthDisplayPrefab != null){
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, radius);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()

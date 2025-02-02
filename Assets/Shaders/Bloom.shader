@@ -67,7 +67,7 @@ Shader "Screen/Bloom"
                 for(float y = -actualRadius; y < actualRadius; y++){
                     for(float x = -actualRadius; x < actualRadius; x++){
                         float4 offsetColor = tex2D(_MainTex, center + (float2(x * _MainTex_TexelSize.x, y * _MainTex_TexelSize.y)));
-                        collectiveColor += offsetColor * offsetColor.a;
+                        collectiveColor += offsetColor * getBrightnessOfColor(offsetColor);
                         sampleCount++;
                     }
                 }

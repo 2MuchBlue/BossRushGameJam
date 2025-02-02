@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TinyJson;
-using Unity.Mathematics;
+//using Unity.Mathematics;
 using UnityEngine.Events;
 
 
@@ -35,10 +35,14 @@ public class ReadSongJson : MonoBehaviour
 
     [Space, SerializeField]
     bool recompJson = false;
+
+    [Space, SerializeField, Header("Tick Time")]
+    float tTime = 0;
     
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("ReadSongJson.cs's start function called in " + this.gameObject.name);
         appleBytes = apple.bytes;
         appleJson = apple.text.FromJson<object>();
 
@@ -116,6 +120,7 @@ public class ReadSongJson : MonoBehaviour
         [Range(0, 100)]
         public int volume = 100;
         public UnityEvent onTrigger;
+        public int[] triggerIfNoteIsNot;
     }
 
     [Serializable]
@@ -124,10 +129,12 @@ public class ReadSongJson : MonoBehaviour
         public int endTick;
         public int volume = 100;
         public int duration;
-        public note(int startTick_, int endTick_ ){
+        public int pitch;
+        public note(int startTick_, int endTick_, int pitch_ ){
             startTick = startTick_;
             endTick = endTick_;
             duration = endTick_ - startTick_;
+            pitch = pitch_;
         }
 
         public bool calledRecently = false;
@@ -153,6 +160,7 @@ public class ReadSongJson : MonoBehaviour
     [Serializable]
     class pattern {
         public note[] notes;
+        public int tone; // the note this would play in beep box
 
         public pattern(note[] _notes){
             notes = _notes;
@@ -192,7 +200,9 @@ public class ReadSongJson : MonoBehaviour
     {
 
         float globalTime = (float)audioSource.timeSamples / (float)audioSource.clip.frequency;
-        Debug.Log(globalTime);
+        float patternTime = (secs2ticks(globalTime) * 0.03125f) % (songObject.sequence.Length - 1);
+        tTime = patternTime;
+        //Debug.Log(globalTime);
 
         ////Debug.Log(secs2ticks(Time.timeSinceLevelLoad));
 
@@ -204,23 +214,28 @@ public class ReadSongJson : MonoBehaviour
         note checkNote = null;
         try
         {
-            float patternTime = (secs2ticks(globalTime) * 0.03125f) % (songObject.sequence.Length - 1);
             int seqIndex = (int)Mathf.Floor(patternTime); // index for the sequence list
             int seqItem = songObject.sequence[ seqIndex ] - 1; // result of sequence grab; one is subtracted because boopbox starts pattern indexes at 1, but the first item is at 0;
-                //Debug.Log("channel: " + channel2compile + " || sequence index: " + seqIndex + " || result: " + seqItem);
+            //Debug.Log("channel: " + channel2compile + " || sequence index: " + seqIndex + " || result: " + seqItem);
             if(seqItem < 0) { return; } // if it is less then 0 (-1) then just skip this and leave
-                //Debug.Log("checking for notes, tickTime: " + patternTime );
+            //Debug.Log("checking for notes, tickTime: " + patternTime );
             checkNote = searchForNoteAtTime(globalTime, seqItem );
             if(checkNote != null){
-                volAttack.onTrigger.Invoke();
+                if(volAttack.triggerIfNoteIsNot.Length < 1 || !Array.Exists(volAttack.triggerIfNoteIsNot, element => element == checkNote.pitch)){
+                    //Debug.Log("trying to invoke VolAttack.onTrigger in game object " + this.gameObject.name);
+                    volAttack.onTrigger.Invoke();
+                }else{
+                    Debug.Log("attack could be triggered, but its in the no fly zone");
+                }
             }else{
                 //Debug.Log("note was not found (tryed, failed)");
             }
         }
         catch (System.Exception)
         {
-            //Debug.LogWarning("nothing was found");
+            Debug.LogWarning("nothing was found");
             checkNote = null;
+            throw;
         }
 
         /*
@@ -314,7 +329,7 @@ public class ReadSongJson : MonoBehaviour
 
         //Debug.Log((int)searchJsonObject(notePoints, new object[]{ 1, "tick" }));
 
-        return new note( (int)searchJsonObject(notePoints, new object[]{ 0, "tick" }), (int)searchJsonObject(notePoints, new object[]{ 1, "tick" }) );
+        return new note( (int)searchJsonObject(notePoints, new object[]{ 0, "tick" }), (int)searchJsonObject(notePoints, new object[]{ 1, "tick" }), (int)searchJsonObject(noteJson, new object[]{ "pitches", 0 }));
     }
 
     pattern tryGetPatternInJsonObject(object jsonObject, int channel, int pattern){

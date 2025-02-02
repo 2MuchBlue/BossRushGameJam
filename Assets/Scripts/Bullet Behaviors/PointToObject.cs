@@ -7,6 +7,14 @@ public class PointToObject : MonoBehaviour
     [SerializeField]
     GameObject pointTo;
 
+    [SerializeField] string lookForTag = ""; // if not empty, will set <pointTo> to any found GameObject 
+
+    void Start(){
+        if(lookForTag != ""){
+            pointTo = GameObject.FindGameObjectWithTag(lookForTag);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {

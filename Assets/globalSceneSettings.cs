@@ -9,10 +9,29 @@ public class globalSceneSettings : MonoBehaviour
 
     public AudioSource[] PlayOnStart;
 
-    void Start(){
-        masterSettings = GameObject.FindGameObjectWithTag("MasterSettings").GetComponent<MasterSettings>();
+    void Awake(){
+        Debug.Log("Starting Scene Functions Running");
+        GameObject mSetsObj = GameObject.FindGameObjectWithTag("MasterSettings");
+        if(mSetsObj != null){ 
+            Debug.Log("Got past finding the object");
+            masterSettings = mSetsObj.GetComponent<MasterSettings>();
+            if(masterSettings != null){ 
+                Debug.Log("got passed finding component");
+                startAudios2vol(masterSettings.musicVol * 0.01f);
+            }else{
+                startAudios2vol(1);
+            }
+            
+        }else{
+            startAudios2vol(1);
+        }
+        
+    }
+
+    void startAudios2vol(float vol){
         for(int i = 0; i < PlayOnStart.Length; i++){
-            PlayOnStart[i].volume = masterSettings.musicVol * 0.01f;
+            Debug.Log("working on source " + i + " of " + PlayOnStart.Length);
+            PlayOnStart[i].volume = vol;
             PlayOnStart[i].Play();
         }
     }

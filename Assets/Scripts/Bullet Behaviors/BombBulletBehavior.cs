@@ -12,7 +12,7 @@ public class BombBulletBehavior : MonoBehaviour
     bool useGlobalSettings = true;
 
     [Header("Bomb Bullet Settings")]
-    public float startingSpeed = 10;
+    public float beatsTillExplode = 4;
     float startTime;
     Vector3 startPos;
     public float timeTillExplode = 0.5f;
@@ -33,7 +33,7 @@ public class BombBulletBehavior : MonoBehaviour
         if(useGlobalSettings){
             globalSceneSettings = GameObject.FindGameObjectWithTag("globalSceneSettingsObject").GetComponent<globalSceneSettings>();
 
-            timeTillExplode = 60 / globalSceneSettings.bpm;
+            timeTillExplode = 60 / globalSceneSettings.bpm * beatsTillExplode;
         }
         Invoke("explodeBomb", timeTillExplode);
     }

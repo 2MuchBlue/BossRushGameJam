@@ -103,8 +103,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf68b89340054a74191935ac098b81cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingSpeed: 10
-  timeTillExplode: 1
+  useGlobalSettings: 1
+  startingSpeed: 4
+  timeTillExplode: 1.6
   distance: 5
   OnExplode:
     m_PersistentCalls:
@@ -216,28 +217,28 @@ MonoBehaviour:
     canHitMask:
       serializedVersion: 2
       m_Bits: 128
-    speed: 5
+    speed: 10
   - bulletPrefab: {fileID: 5922457150442944213, guid: 07354d7117df3f54b860d5ddc9b97909, type: 3}
     offsetPosition: {x: 0, y: 0, z: 0}
     offsetRotation: {x: 0, y: 0, z: 90}
     canHitMask:
       serializedVersion: 2
       m_Bits: 128
-    speed: 5
+    speed: 10
   - bulletPrefab: {fileID: 5922457150442944213, guid: 07354d7117df3f54b860d5ddc9b97909, type: 3}
     offsetPosition: {x: 0, y: 0, z: 0}
     offsetRotation: {x: 0, y: 0, z: 180}
     canHitMask:
       serializedVersion: 2
       m_Bits: 128
-    speed: 5
+    speed: 10
   - bulletPrefab: {fileID: 5922457150442944213, guid: 07354d7117df3f54b860d5ddc9b97909, type: 3}
     offsetPosition: {x: 0, y: 0, z: 0}
     offsetRotation: {x: 0, y: 0, z: 270}
     canHitMask:
       serializedVersion: 2
       m_Bits: 128
-    speed: 5
+    speed: 10
   index: 0
 --- !u!114 &1906272109342196465
 MonoBehaviour:
