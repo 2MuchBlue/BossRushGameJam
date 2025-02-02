@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Arena/MainBoss-01.unity
     guid: bdc8b63b47b784deeaf542ce1a03a089
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 85aa4796501f04dfda09c6c5586ab782
   m_configObjects: {}
