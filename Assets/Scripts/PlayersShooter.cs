@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayersShooter : MonoBehaviour
 {
@@ -30,8 +31,8 @@ public class PlayersShooter : MonoBehaviour
     void Update()
     {
         Vector3 aim = new Vector3(
-            Input.GetAxisRaw("ShootHorz"),
-            Input.GetAxisRaw("ShootVert"),
+            aimInputVal.x,
+            aimInputVal.y,
             0
         ).normalized;
 
@@ -70,5 +71,10 @@ public class PlayersShooter : MonoBehaviour
                 hurter.speed = bulletMovement.speed;
             }
         }
+    }
+
+    private Vector2 aimInputVal;
+    private void OnAimAction(InputValue inputValue){
+        aimInputVal = inputValue.Get<Vector2>();
     }
 }

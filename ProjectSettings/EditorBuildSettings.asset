@@ -15,11 +15,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Arena/arena01.unity
     guid: f1226b68fa71b454d8d22d004ed8ba3b
   - enabled: 1
-    path: Assets/Scenes/Arena/tut-02.unity
-    guid: 9399279a5ade7f34d959aa5f2f713160
+    path: Assets/Scenes/Arena/tut-00.unity
+    guid: 35dbe7de2bacc441eb3c5aa8fccbcd63
   - enabled: 1
     path: Assets/Scenes/Arena/tut-01.unity
     guid: 0a850623a6e73df418b90c8dfa742435
+  - enabled: 1
+    path: Assets/Scenes/Arena/tut-02.unity
+    guid: 9399279a5ade7f34d959aa5f2f713160
   - enabled: 1
     path: Assets/Scenes/Arena/MainBoss-01.unity
     guid: bdc8b63b47b784deeaf542ce1a03a089

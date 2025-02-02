@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovment : MonoBehaviour
 {
@@ -41,7 +42,7 @@ public class PlayerMovment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 movementVector = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), 0);
+        Vector3 movementVector = new Vector3(moveInputVal.x, moveInputVal.y, 0);
         movementVector = Vector3.ClampMagnitude(movementVector, 1);
 
         //Vector3 targetCamPos = transform.position + (movementVector * advanceValue);
@@ -69,5 +70,11 @@ public class PlayerMovment : MonoBehaviour
         );
         //Debug.Log(cameraVelocity);
         //cam.transform.position += cameraVelocity;
+    }
+
+    private Vector2 moveInputVal;
+    private Vector2 aimInputVal;
+    private void OnMoveAction(InputValue inputValue){
+        moveInputVal = inputValue.Get<Vector2>();
     }
 }

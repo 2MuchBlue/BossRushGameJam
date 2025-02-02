@@ -2598,7 +2598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d1b3943ecf6745448d8353fbe3f5401, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToChangeTo: tutorial01
+  sceneToChangeTo: tut-01
 --- !u!114 &1628725949
 MonoBehaviour:
   m_ObjectHideFlags: 0
